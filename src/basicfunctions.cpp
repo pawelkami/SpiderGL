@@ -87,7 +87,8 @@ void keyPressed( unsigned char key, int x, int y )
 		break;
 
 	case 'f':
-		scene.position_y -= 0.4;
+		if ( scene.position_y > 0.0 )
+			scene.position_y -= 0.4;
 		break;
 
 		// tg - nachylenie góra-dó³
@@ -119,19 +120,30 @@ void keySpecial( int key, int x, int y )
 	switch ( key )
 	{
 	case GLUT_KEY_UP:
-		spider.move( -moveX, 0.0, moveZ );
-		scene.position_x -= moveX;
-		scene.position_z += moveZ;
+		//warunek ¿eby paj¹k nie wychodzi³ poza planszê
+		if ( spider.getX()-moveX > -37.5 && spider.getX()-moveX < 47 && spider.getZ()+moveZ < 56.5 && spider.getZ()+moveZ > -27)
+		{ 
+			spider.move( -moveX, 0.0, moveZ );
+			scene.position_x -= moveX;
+			scene.position_z += moveZ;
+		}
 		spider.moveLeftLegs();
 		spider.moveRightLegs();
+		spider.moveBody();
+
 		break;
 
 	case GLUT_KEY_DOWN:
-		spider.move( moveX, 0.0, -moveZ );
-		scene.position_x += moveX;
-		scene.position_z -= moveZ;
+		// warunek ¿eby paj¹k nie wychodzi³ poza planszê
+		if ( spider.getX() + moveX > -37.5 && spider.getX() + moveX < 47 && spider.getZ() - moveZ < 56.5 && spider.getZ() - moveZ > -27 )
+		{
+			spider.move( moveX, 0.0, -moveZ );
+			scene.position_x += moveX;
+			scene.position_z -= moveZ;
+		}
 		spider.moveLeftLegs();
 		spider.moveRightLegs();
+		spider.moveBody();
 		break;
 
 	case GLUT_KEY_LEFT:

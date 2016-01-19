@@ -13,7 +13,12 @@ public:
 	void drawSpider();
 	void moveLeftLegs();
 	void moveRightLegs();
+	void moveBody();
 	GLfloat getRotation() const;
+	GLfloat getX() const;
+	GLfloat getY() const;
+	GLfloat getZ() const;
+
 
 private:
 	GLfloat eyes[4];
@@ -41,6 +46,11 @@ private:
 
 	// rysowanie czêœci prawej nogi
 	void legPartsRight();
+
+	// do poruszania odw³okiem
+	GLfloat bodyCount;	// w jakiej pozycji ma byæ odw³ok
+
+	bool bodyUpside; // czy ma iœæ w górê czy w dó³
 
 };
 

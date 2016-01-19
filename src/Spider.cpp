@@ -13,6 +13,8 @@ Spider::Spider()
 	moveX = 0;
 	moveY = 0;
 	moveZ = 0;
+	bodyCount = 15;
+	bodyUpside = true;
 	rotation = 45;
 
 	leftSideCount = 0.0;
@@ -28,6 +30,8 @@ Spider::Spider( GLfloat skinColor[], GLfloat eyesColor[] )
 	moveX = 0;
 	moveY = 0;
 	moveZ = 0;
+	bodyCount = 15;
+	bodyUpside = true;
 	rotation = 45;
 
 	leftSideCount = 0.0;
@@ -53,12 +57,29 @@ GLfloat Spider::getRotation() const
 	return rotation;
 }
 
+GLfloat Spider::getX() const
+{
+	return moveX;
+}
+
+
+GLfloat Spider::getY() const
+{
+	return moveY;
+}
+
+GLfloat Spider::getZ() const
+{
+	return moveZ;
+}
+
 
 void Spider::drawBody()
 {
 	//ty³ odw³oku
 	glPushMatrix();
-		glRotatef( 15, 0, 0, 1 );
+		glTranslatef( 0.0, bodyCount/30.0-0.5, 0.0 );
+		glRotatef( bodyCount, 0, 0, 1 );
 		glScalef( 2.0, 0.9, 1.2 );
 		glutSolidSphere( 1.0, 100, 100 );
 	glPopMatrix();
@@ -289,6 +310,23 @@ void Spider::moveRightLegs()
 			rightSideForward = true;
 	}
 }
+
+void Spider::moveBody()
+{
+	if ( bodyUpside )
+	{
+		bodyCount += 1;
+		if ( bodyCount >= 25 )
+			bodyUpside = false;
+	}
+	else
+	{
+		bodyCount -= 1;
+		if ( bodyCount <= 15 )
+			bodyUpside = true;
+	}
+}
+
 
 void Spider::drawSpider()
 {
