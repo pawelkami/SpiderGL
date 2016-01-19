@@ -150,12 +150,14 @@ void keySpecial( int key, int x, int y )
 		spider.changeRotation( 4 );
 		spider.moveLeftLegs();
 		spider.moveRightLegs();
+		spider.moveBody();
 		break;
 
 	case GLUT_KEY_RIGHT:
 		spider.changeRotation( -4 );
 		spider.moveLeftLegs();
 		spider.moveRightLegs();
+		spider.moveBody();
 		break;
 	}
 
