@@ -36,10 +36,13 @@ struct Scenery
 	GLfloat diffuse[4];
 	GLfloat mat_specular[4];
 	GLfloat light_position[4];
+	GLfloat fog_color[4];
+	GLfloat fog_density;
 	//sterowanie oœwietleniem
 	GLfloat lightAmbientLevel;
 	GLfloat lightDiffuseLevel;
 	GLfloat light_position_change;
+
 
 	Scenery()
 	{
@@ -78,6 +81,13 @@ struct Scenery
 		lightAmbientLevel = 2.0;
 		lightDiffuseLevel = 1.5;
 		light_position_change = 1.0;
+
+		fog_color[0] = 0.33f;
+		fog_color[1] = 0.33f;
+		fog_color[2] = 0.33f;
+		fog_color[3] = 1.0f;
+
+		fog_density = 0.1f;
 	}
 
 	void changeAmbientLevel( float lvl )
@@ -116,6 +126,18 @@ struct Scenery
 		};
 
 		glLightfv( GL_LIGHT1, GL_DIFFUSE, newDiffuse );
+	}
+
+	void changeFogDensity( float lvl )
+	{
+		fog_density += lvl;
+		if ( fog_density <= 0.0 )
+			fog_density = 0.0;
+
+		if ( fog_density >= 1.0 )
+			fog_density = 1.0;
+
+		glFogf( GL_FOG_DENSITY, fog_density );
 	}
 
 };

@@ -108,6 +108,14 @@ void keyPressed( unsigned char key, int x, int y )
 	case 'n':
 		scene.changeDiffuseLevel( -0.1 );
 		break;
+
+	case 'o':
+		scene.changeFogDensity( 0.1 );
+		break;
+
+	case 'p':
+		scene.changeFogDensity(-0.1);
+		break;
 	};
 }
 
@@ -193,6 +201,17 @@ void init()
 	glEnable( GL_LIGHT0 );
 	glEnable( GL_LIGHT1 );
 	glShadeModel( GL_SMOOTH );
+
+	glHint( GL_FOG_HINT, GL_NICEST );
+
+	glFogfv( GL_FOG_COLOR, scene.fog_color );
+
+	glFogf( GL_FOG_DENSITY, scene.fog_density );
+
+	glFogf( GL_FOG_MODE, GL_EXP );
+
+	glEnable( GL_FOG );
+
 }
 
 void displayObjects()

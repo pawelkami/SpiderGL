@@ -42,10 +42,10 @@ private:
 	void drawLegs();
 
 	//rysowanie czêœci lewej nogi
-	void legPartsLeft();
+	void legPartsLeft(GLfloat);
 
 	// rysowanie czêœci prawej nogi
-	void legPartsRight();
+	void legPartsRight(GLfloat);
 
 	// do poruszania odw³okiem
 	GLfloat bodyCount;	// w jakiej pozycji ma byæ odw³ok

@@ -125,11 +125,13 @@ void Spider::drawEyes()
 	glPopMatrix();
 }
 
-void Spider::legPartsLeft()
+void Spider::legPartsLeft(GLfloat x)
 {
 	glPushMatrix();
 		glTranslatef( -0.5, 0.0, 0.0 );
 		glutSolidSphere( 0.1, 10, 10 );
+
+		glRotatef( x, 0, 0, 1 );
 
 		glPushMatrix();
 			glTranslatef( 0.22, -0.6, 0.0 );
@@ -141,15 +143,17 @@ void Spider::legPartsLeft()
 
 }
 
-void Spider::legPartsRight()
+void Spider::legPartsRight(GLfloat x)
 {
 	glPushMatrix();
-	glTranslatef( 0.5, 0.0, 0.0 );
-	glutSolidSphere( 0.1, 10, 10 );
+		glTranslatef( 0.5, 0.0, 0.0 );
+		glutSolidSphere( 0.1, 10, 10 );
+
+		glRotatef( x, 0, 0, 1 );
 
 		glPushMatrix();
 			glTranslatef( -0.22, -0.6, 0.0 );
-			glRotatef( -110, 0, 0, 1 );
+			glRotatef( -110 , 0, 0, 1 );
 			glScalef( 3.7, 0.2, 0.2 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
@@ -162,6 +166,7 @@ void Spider::drawLegs()
 	// lewa
 	glPushMatrix();
 		glTranslatef( -3.4, -0.2, 0.8 );
+		glRotatef( leftSideCount, 1, 0, 1 );
 		glRotatef( 80.0 + leftSideCount, 0, 1, 0 );
 		glTranslatef( -0.5, 0.0, 0.0 );
 		glRotatef( -30, 0, 0, 1 );
@@ -170,12 +175,14 @@ void Spider::drawLegs()
 			glScalef( 3, 0.4, 0.4 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
-		legPartsLeft();
+		legPartsLeft(leftSideCount*1.1);
 	glPopMatrix();
 
 	// prawa
 	glPushMatrix();
 		glTranslatef( -3.4, -0.2, -0.8 );
+		glRotatef( -rightSideCount, 1, 0, 1 );
+
 		glRotatef( 80.0 + rightSideCount, 0, 1, 0 );
 		glTranslatef( 0.5, 0.0, 0.0 );
 
@@ -185,13 +192,16 @@ void Spider::drawLegs()
 			glScalef( 3, 0.4, 0.4 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
-		legPartsRight();
+		legPartsRight( -rightSideCount*1.1 );
 	glPopMatrix();
 
 	// nogi przednie œrodkowe
 	// lewa
 	glPushMatrix();
 		glTranslatef( -2.8, -0.2, 0.8 );
+
+		glRotatef( rightSideCount, 1, 0, 1 );
+
 		glRotatef( 80.0 + rightSideCount, 0, 1, 0 );
 		glTranslatef( -0.5, 0.0, 0.0 );
 
@@ -201,12 +211,14 @@ void Spider::drawLegs()
 			glScalef( 3, 0.4, 0.4 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
-		legPartsLeft();
+		legPartsLeft( rightSideCount*1.1 );
 	glPopMatrix();
 
 	// prawa
 	glPushMatrix();
-		glTranslatef( -2.8, -0.2, -0.8 );
+		glTranslatef( -2.8, -0.2/*+leftSideCount/75.0*/, -0.8 );
+		glRotatef( -leftSideCount, 1, 0, 1 );
+
 		glRotatef( 80.0 + leftSideCount, 0, 1, 0 );
 		glTranslatef( 0.5, 0.0, 0.0 );
 
@@ -216,13 +228,16 @@ void Spider::drawLegs()
 			glScalef( 3, 0.4, 0.4 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
-		legPartsRight();
+		legPartsRight( -leftSideCount*1.1 );
 	glPopMatrix();
 
 	// nogi tylne œrodkowe
 	// lewa
 	glPushMatrix();
-		glTranslatef( -2.2, -0.2, 0.8 );
+		glTranslatef( -2.2, -0.2/*+leftSideCount/75.0*/, 0.8 );
+
+		glRotatef( leftSideCount, 1, 0, 1 );
+
 		glRotatef( 80.0 + leftSideCount, 0, 1, 0 );
 		glTranslatef( -0.5, 0.0, 0.0 );
 		glRotatef( -30, 0, 0, 1 );
@@ -231,12 +246,14 @@ void Spider::drawLegs()
 			glScalef( 3, 0.4, 0.4 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
-		legPartsLeft();
+		legPartsLeft( leftSideCount*1.1 );
 	glPopMatrix();
 
 	// prawa
 	glPushMatrix();
-		glTranslatef( -2.2, -0.2, -0.8 );
+		glTranslatef( -2.2, -0.2/*+rightSideCount/75.0*/, -0.8 );
+		glRotatef( -rightSideCount, 1, 0, 1 );
+
 		glRotatef( 80.0 + rightSideCount, 0, 1, 0 );
 		glTranslatef( 0.5, 0.0, 0.0 );
 		glRotatef( 30, 0, 0, 1 );
@@ -245,7 +262,7 @@ void Spider::drawLegs()
 			glScalef( 3, 0.4, 0.4 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
-		legPartsRight();
+		legPartsRight( -rightSideCount*1.1 );
 	glPopMatrix();
 
 
@@ -253,6 +270,8 @@ void Spider::drawLegs()
 	// lewa
 	glPushMatrix();
 		glTranslatef( -1.5, -0.2, 0.8 );
+		glRotatef( rightSideCount, 1, 0, 1 );
+
 		glRotatef( 80.0 + rightSideCount, 0, 1, 0 );
 		glTranslatef( -0.5, 0.0, 0.0 );
 		glRotatef( -30, 0, 0, 1 );
@@ -261,12 +280,14 @@ void Spider::drawLegs()
 			glScalef( 3, 0.4, 0.4 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
-		legPartsLeft();
+		legPartsLeft( rightSideCount*1.1 );
 	glPopMatrix();
 
 	// prawa
 	glPushMatrix();
 		glTranslatef( -1.5, -0.2, -0.8 );
+		glRotatef( -leftSideCount, 1, 0, 1 );
+
 		glRotatef( 80.0 + leftSideCount, 0, 1, 0 );
 		glTranslatef( 0.5, 0.0, 0.0 );
 		glRotatef( 30, 0, 0, 1 );
@@ -275,7 +296,7 @@ void Spider::drawLegs()
 			glScalef( 3, 0.4, 0.4 );
 			glutSolidSphere( 0.2, 50, 50 );
 		glPopMatrix();
-		legPartsRight();
+		legPartsRight( -leftSideCount*1.1 );
 	glPopMatrix();
 }
 
@@ -284,13 +305,13 @@ void Spider::moveLeftLegs()
 	if ( leftSideForward )
 	{
 		leftSideCount += 3;
-		if ( leftSideCount >= 18 )
+		if ( leftSideCount >= 15 )
 			leftSideForward = false;
 	}
 	else
 	{
 		leftSideCount -= 3;
-		if ( leftSideCount <= -18 )
+		if ( leftSideCount <= -15 )
 			leftSideForward = true;
 	}
 }
@@ -300,13 +321,13 @@ void Spider::moveRightLegs()
 	if ( rightSideForward )
 	{
 		rightSideCount += 3;
-		if ( rightSideCount >= 18 )
+		if ( rightSideCount >= 15 )
 			rightSideForward = false;
 	}
 	else
 	{
 		rightSideCount -= 3;
-		if ( rightSideCount <= -18 )
+		if ( rightSideCount <= -15 )
 			rightSideForward = true;
 	}
 }
